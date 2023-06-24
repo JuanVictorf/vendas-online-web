@@ -2,9 +2,9 @@
 import styled from "styled-components";
 
 export const ContainerLoginScreen = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: right;
+  width: 100%;
+  display: flex;
+  justify-content: right;
 `;
 
 export const BackgroundImage = styled.img`
@@ -17,27 +17,26 @@ export const BackgroundImage = styled.img`
   z-index: -1;
 `;
 
-export const LogoImage = styled.img`
-    
-`;
+export const LogoImage = styled.img``;
 
 export const ContainerLogin = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #D9D9D9;
-    width: 50%;
-    height: 100vh;
-    // Alterar daqui para baixo para ficar mais adequado a minha tela.
-    max-width: 646px; 
-    right: 0;
-    top: 0;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d9d9d9;
+  width: 50%;
+  height: 100vh;
+  // Alterar daqui para baixo para ficar mais adequado a minha tela.
+  max-width: 646px;
+  right: 0;
+  top: 0;
+  z-index: 2;
 `;
 
 export const LimitedContainer = styled.div`
-    width: 100%;
-    max-width: 498px;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  max-width: 498px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;

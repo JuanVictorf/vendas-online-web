@@ -1,16 +1,26 @@
 /* eslint-disable prettier/prettier */
 //import React from "react";
 
-import { BackgroundImage, ContainerLogin, ContainerLoginScreen, LimitedContainer, LogoImage } from "../styles/loginScreen.styles";
+import Input from "../../../shared/inputs/input/Input";
+import {
+  BackgroundImage,
+  ContainerLogin,
+  ContainerLoginScreen,
+  LimitedContainer,
+  LogoImage,
+} from "../styles/loginScreen.styles";
 
 const LoginScreen = () => {
   return (
     <ContainerLoginScreen>
-      <BackgroundImage src="./background.png" />
       <ContainerLogin>
-        <LimitedContainer />
-        <LogoImage src="./logo.png"></LogoImage>
+        <LimitedContainer>
+          <LogoImage src="./logo.png" />
+          <Input title= "USUÁRIO" />
+          <Input title= "SENHA" />
+        </LimitedContainer> 
       </ContainerLogin>
+      <BackgroundImage src="./background.png" />
     </ContainerLoginScreen>
   );
 };
