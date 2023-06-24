@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 //import React from "react";
 
+import axios from "axios";
 import { useState } from "react";
 
 import Button from "../../../shared/buttons/button/Button";
@@ -15,22 +16,37 @@ import {
 } from "../styles/loginScreen.styles";
 
 const LoginScreen = () => {
-  
-  const [username, setUserName] =  useState('');
-  const [password, setPassword] =  useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value);
-  }
+  const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
 
   const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-  }
-  
-  const handleLogin = () => {
-    alert(`${username} , ${password}`)
-  }
-  
+  };
+
+  const handleLogin = async () => {
+    // Envia uma requisição post
+    await axios({
+      method: "post",
+      url: "http://localhost:8080/auth",
+      data: {
+        email: email,
+        password: password,
+      },
+    })
+    .then((result) => {
+      alert("Fez login!");
+      return result.data;
+    })
+    .catch(() => {
+      alert("Usuário ou senha inválido");
+    });
+    
+  };
+
   return (
     <ContainerLoginScreen>
       <ContainerLogin>
@@ -40,9 +56,24 @@ const LoginScreen = () => {
             {" "}
             LOGIN{" "}
           </TitleLogin>
-          <Input title="USUÁRIO" margin="32px 0px 0px" onChange={handleUsername} value={username}/>
-          <Input type="password" title="SENHA" margin="12px 0px 0px" onChange={handlePassword} value={password}/>
-          <Button type="primary" margin="30px 0px 16px 0px" onClick={handleLogin}>
+          <Input
+            title="USUÁRIO"
+            margin="32px 0px 0px"
+            onChange={handleEmail}
+            value={email}
+          />
+          <Input
+            type="password"
+            title="SENHA"
+            margin="12px 0px 0px"
+            onChange={handlePassword}
+            value={password}
+          />
+          <Button
+            type="primary"
+            margin="30px 0px 16px 0px"
+            onClick={handleLogin}
+          >
             ENTRAR
           </Button>
         </LimitedContainer>
