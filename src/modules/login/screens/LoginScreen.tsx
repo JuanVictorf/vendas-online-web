@@ -37,14 +37,13 @@ const LoginScreen = () => {
         password: password,
       },
     })
-    .then((result) => {
-      alert("Fez login!");
-      return result.data;
-    })
-    .catch(() => {
-      alert("Usuário ou senha inválido");
-    });
-    
+      .then((result) => {
+        alert("Fez login!");
+        return result.data;
+      })
+      .catch(() => {
+        alert("Usuário ou senha inválido");
+      });
   };
 
   return (
