@@ -3,8 +3,11 @@
 import axios from "axios";
 import { useState } from "react";
 
+import { useGlobalContext } from "./useGlobalContext";
+
 export const useRequests = () => {
   const [loading, setLoading] = useState(false);
+  const { setNotification } = useGlobalContext();
 
   const getRequest = async (url: string) => {
     setLoading(true);
@@ -28,10 +31,11 @@ export const useRequests = () => {
       data: body,
     })
       .then((result) => {
+        setNotification("Entrando...", "success");
         return result.data;
       })
       .catch(() => {
-        alert("Usuário ou senha inválido");
+        setNotification("Senha ou usuário incorretos.", "info");
       });
 
     setLoading(false);

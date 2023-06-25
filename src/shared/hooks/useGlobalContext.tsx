@@ -1,8 +1,18 @@
 /* eslint-disable prettier/prettier */
 import { createContext, useContext, useState } from "react";
 
+
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
+interface NotificationProps {
+    message: string;
+    type: NotificationType;
+    description?: string;
+}
+
 interface GlobalData {
   acessToken?: string;
+  notification?: NotificationProps;
 }
 
 interface GlobalContextProps {
@@ -36,8 +46,22 @@ export const useGlobalContext = () => {
     });
   };
 
+
+  const setNotification = (message: string, type: NotificationType, description?: string) => {
+    setGlobalData({
+        ...globalData,
+        notification: {
+            message,
+            type,
+            description,
+        }
+    })
+  }
+
   return {
+    notification: globalData?.notification,
     acessToken: globalData?.acessToken,
     setAcessToken,
+    setNotification,
   };
 };
