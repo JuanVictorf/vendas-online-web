@@ -32,7 +32,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     // Envia uma requisição post
-    setAcessToken('Novo Token');
+    setAcessToken("Novo Token");
     postRequest("http://localhost:8080/auth", {
       email: email,
       password: password,

@@ -2,45 +2,42 @@
 import { createContext, useContext, useState } from "react";
 
 interface GlobalData {
-    acessToken?: string;
+  acessToken?: string;
 }
 
 interface GlobalContextProps {
-    globalData: GlobalData;
-    setGlobalData: (globalData: GlobalData) => void
+  globalData: GlobalData;
+  setGlobalData: (globalData: GlobalData) => void;
 }
 
 const GlobalContext = createContext({} as GlobalContextProps);
 
 interface GlobalProviderProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export const GlobalProvider = ({children}: GlobalProviderProps) => {
+export const GlobalProvider = ({ children }: GlobalProviderProps) => {
+  const [globalData, setGlobalData] = useState<GlobalData>({});
 
-    const [ globalData, setGlobalData ] = useState<GlobalData>({});
-
-    return (
-        <GlobalContext.Provider value={{globalData, setGlobalData }}>
-            {children}
-        </GlobalContext.Provider>
-    );
+  return (
+    <GlobalContext.Provider value={{ globalData, setGlobalData }}>
+      {children}
+    </GlobalContext.Provider>
+  );
 };
 
 export const useGlobalContext = () => {
-    const { globalData, setGlobalData } = useContext(GlobalContext);
+  const { globalData, setGlobalData } = useContext(GlobalContext);
 
-    const setAcessToken = (acessToken: string) => {
-        setGlobalData({
-            ...globalData,
-            acessToken,
-        });
-    };
+  const setAcessToken = (acessToken: string) => {
+    setGlobalData({
+      ...globalData,
+      acessToken,
+    });
+  };
 
-
-    return {
-        acessToken: globalData?.acessToken,
-        setAcessToken,
-    }
-}
-
+  return {
+    acessToken: globalData?.acessToken,
+    setAcessToken,
+  };
+};
