@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 //import React from "react";
 
-import axios from "axios";
 import { useState } from "react";
 
 import Button from "../../../shared/buttons/button/Button";
+import { useGlobalContext } from "../../../shared/hooks/useGlobalContext";
 import { useRequests } from "../../../shared/hooks/useRequets";
 import Input from "../../../shared/inputs/input/Input";
 import {
@@ -17,6 +17,7 @@ import {
 } from "../styles/loginScreen.styles";
 
 const LoginScreen = () => {
+  const { acessToken, setAcessToken } = useGlobalContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { postRequest, loading } = useRequests();
@@ -31,6 +32,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     // Envia uma requisição post
+    setAcessToken('Novo Token');
     postRequest("http://localhost:8080/auth", {
       email: email,
       password: password,
@@ -43,8 +45,7 @@ const LoginScreen = () => {
         <LimitedContainer>
           <LogoImage src="./logo.png" />
           <TitleLogin level={2} type="secondary">
-            {" "}
-            LOGIN{" "}
+            LOGIN ({acessToken});
           </TitleLogin>
           <Input
             title="USUÁRIO"
@@ -60,7 +61,7 @@ const LoginScreen = () => {
             value={password}
           />
           <Button
-            loading={loading} 
+            loading={loading}
             type="primary"
             margin="30px 0px 16px 0px"
             onClick={handleLogin}
