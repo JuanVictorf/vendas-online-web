@@ -8,14 +8,13 @@ export const useNotification = () => {
   const [api, contextHolder] = notificationAntd.useNotification();
   const { notification } = useGlobalContext();
 
-
   useEffect(() => {
-    if(notification?.message && notification.type){
-        api[notification.type]({
-            message: `${notification.message}`,
-            description: notification.description,
-            placement: "bottomRight",
-        });
+    if (notification?.message && notification.type) {
+      api[notification.type]({
+        message: `${notification.message}`,
+        description: notification.description,
+        placement: "bottomRight",
+      });
     }
   }, [notification]);
 
