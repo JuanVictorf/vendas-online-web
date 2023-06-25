@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import Button from "../../../shared/buttons/button/Button";
+import { useRequests } from "../../../shared/hooks/useRequets";
 import Input from "../../../shared/inputs/input/Input";
 import {
   BackgroundImage,
@@ -18,6 +19,7 @@ import {
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { postRequest, loading } = useRequests();
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -29,21 +31,10 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     // Envia uma requisição post
-    await axios({
-      method: "post",
-      url: "http://localhost:8080/auth",
-      data: {
-        email: email,
-        password: password,
-      },
-    })
-      .then((result) => {
-        alert("Fez login!");
-        return result.data;
-      })
-      .catch(() => {
-        alert("Usuário ou senha inválido");
-      });
+    postRequest("http://localhost:8080/auth", {
+      email: email,
+      password: password,
+    });
   };
 
   return (
@@ -69,6 +60,7 @@ const LoginScreen = () => {
             value={password}
           />
           <Button
+            loading={loading} 
             type="primary"
             margin="30px 0px 16px 0px"
             onClick={handleLogin}
