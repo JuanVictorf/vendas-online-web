@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+import { getAuthorizationToken, setAuthorizationToken } from "../functions/connection/auth";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -38,7 +40,15 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
 export const useGlobalContext = () => {
   const { globalData, setGlobalData } = useContext(GlobalContext);
 
+  useEffect(() => {
+    const token = getAuthorizationToken();
+    if (token){
+      setAcessToken(token);
+    }
+  }, []);
+
   const setAcessToken = (acessToken: string) => {
+    setAuthorizationToken(acessToken);
     setGlobalData({
       ...globalData,
       acessToken,

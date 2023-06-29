@@ -15,6 +15,7 @@ import {
   LogoImage,
   TitleLogin,
 } from "../styles/loginScreen.styles";
+import { UserType } from "../types/UserType";
 
 const LoginScreen = () => {
   const { acessToken, setAcessToken } = useGlobalContext();
@@ -32,11 +33,11 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     // Envia uma requisição post
-    setAcessToken("Novo Token");
-    postRequest("http://localhost:8080/auth", {
+    const user = await postRequest<UserType>("http://localhost:8080/auth", {
       email: email,
       password: password,
     });
+    setAcessToken(user?.acessToken || '');
   };
 
   return (
